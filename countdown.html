@@ -109,14 +109,14 @@ body{
 
 .subtitle{
   margin-top:3px;
-  font-size:6px;
+  font-size:7px;
   font-weight:900;
   letter-spacing:1px;
 }
 
 .header-right{
   text-align:right;
-  font-size:6px;
+  font-size:7px;
   font-weight:900;
   letter-spacing:.4px;
 }
@@ -125,7 +125,7 @@ body{
   position:relative;
   z-index:2;
   margin:6px 0 5px;
-  font-size:9px;
+  font-size:8px;
   font-weight:900;
   letter-spacing:1px;
 }
@@ -134,7 +134,7 @@ body{
   position:relative;
   z-index:2;
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:6px;
 }
 
@@ -154,7 +154,7 @@ body{
 }
 
 .type{
-  font-size:6px;
+  font-size:7px;
   font-weight:900;
   letter-spacing:.4px;
 }
@@ -163,7 +163,7 @@ body{
   padding:1px 3px;
   background:var(--black);
   color:var(--yellow);
-  font-size:6px;
+  font-size:7px;
   font-weight:900;
 }
 
@@ -176,7 +176,7 @@ body{
 }
 
 .date{
-  font-size:8px;
+  font-size:9px;
   font-weight:700;
 }
 
@@ -184,7 +184,7 @@ body{
   margin-top:4px;
   padding-top:4px;
   border-top:1px solid var(--black);
-  font-size:8px;
+  font-size:9px;
   font-weight:900;
   line-height:1.2;
 }
@@ -211,9 +211,9 @@ body{
   background:var(--black);
 }
 
-@media(max-width:650px){
+@media(max-width:420px){
   .countdowns{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr;
   }
 }
 
@@ -271,28 +271,7 @@ body{
         <div class="date">2026.12.21</div>
         <div class="label">1차 중간 점검</div>
       </div>
-
-      <div class="card">
-        <div class="card-top">
-          <span class="type">CHECKPOINT</span>
-          <span class="badge">점검</span>
-        </div>
-        <div class="dday" data-date="2027-01-15">D-</div>
-        <div class="date">2027.01.15</div>
-        <div class="label">2차 중간점검</div>
-      </div>
-
-      <div class="card">
-        <div class="card-top">
-          <span class="type">DEADLINE</span>
-          <span class="badge">마감</span>
-        </div>
-        <div class="dday" data-date="2027-02-21">D-</div>
-        <div class="date">2027.02.21</div>
-        <div class="label">원고 마감일</div>
-      </div>
-
-      <div class="card">
+<div class="card">
         <div class="card-top">
           <span class="type">RELEASE</span>
           <span class="badge">발매</span>
