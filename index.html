@@ -1,51 +1,382 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>八十稲羽 PERSONA 4</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
-      background: transparent;
-      overflow: hidden;
-    }
-    .weather-wrap {
-      width: 100%;
-      min-height: 180px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八十稲羽 WEATHER - TV</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+:root{
+  --yellow:#FFD83D;
+  --yellow2:#FFC928;
+  --cream:#FFF0A3;
+  --black:#161616;
+  --gray:#333;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  background:transparent;
+}
+
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  color:var(--black);
+}
+
+/* TV BODY */
+.tv{
+  width:min(1100px,100%);
+  margin:0 auto;
+  padding:8px 12px;
+  background:var(--black);
+  border-radius:18px;
+  box-shadow:10px 10px 0 rgba(0,0,0,.22);
+}
+
+/* SCREEN */
+.screen{
+  position:relative;
+  overflow:hidden;
+  padding:10px 14px;
+  background:var(--yellow);
+  border:3px solid #050505;
+  border-radius:8px;
+}
+
+/* CRT scanlines */
+.screen::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:20;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,.055) 0px,
+      rgba(0,0,0,.055) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+/* subtle screen glow */
+.screen::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:19;
+  box-shadow:inset 0 0 45px rgba(255,255,255,.22);
+}
+
+/* TOP BROADCAST BAR */
+.broadcast{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:-10px -14px 8px;
+  padding:6px 10px;
+  background:var(--black);
+  color:var(--yellow);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.live-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--yellow);
+  animation:blink 1.2s infinite;
+}
+
+@keyframes blink{
+  0%,45%{opacity:1}
+  46%,100%{opacity:.25}
+}
+
+/* HEADER */
+.header{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:15px;
+  padding:2px 5px 7px;
+  border-bottom:4px solid var(--black);
+}
+
+.station{
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.title{
+  margin-top:2px;
+  font-size:clamp(34px,8vw,68px);
+  font-weight:900;
+  line-height:.9;
+  letter-spacing:-3px;
+}
+
+.subtitle{
+  margin-top:8px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+.clock{
+  text-align:right;
+  font-size:10px;
+  font-weight:900;
+  line-height:1.6;
+  letter-spacing:1px;
+}
+
+.clock strong{
+  display:block;
+  font-size:20px;
+  letter-spacing:0;
+}
+
+/* PROGRAM LABEL */
+.program{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:7px 0 5px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.program::before{
+  content:"";
+  width:12px;
+  height:12px;
+  background:var(--black);
+  transform:skew(-18deg);
+}
+
+/* WEATHER WIDGET */
+.weather-frame{
+  position:relative;
+  z-index:2;
+  padding:7px;
+  background:var(--black);
+  clip-path:polygon(
+    0 0, 99% 0, 100% 4%,
+    100% 96%, 98% 100%,
+    1% 100%, 0 96%
+  );
+}
+
+.weather-inner{
+  background:var(--cream);
+  overflow:hidden;
+}
+
+/* WeatherWidget */
+.weatherwidget-io{
+  display:block !important;
+  width:100% !important;
+  min-height:125px;
+  background:var(--cream) !important;
+}
+
+/* LOWER TV CAPTION */
+.caption{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:7px;
+}
+
+.caption-left{
+  padding:6px 10px;
+  background:var(--black);
+  color:var(--yellow);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
+
+.caption-right{
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+/* TV FOOTER */
+.tv-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:5px;
+  padding:2px 5px;
+  color:#aaa;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.signal{
+  display:flex;
+  gap:3px;
+}
+
+.signal i{
+  width:6px;
+  height:6px;
+  display:block;
+  background:#aaa;
+}
+
+/* MOBILE */
+@media(max-width:520px){
+  .tv{
+    padding:7px;
+    border-radius:12px;
+    box-shadow:5px 5px 0 rgba(0,0,0,.2);
+  }
+
+  .screen{
+    padding:9px;
+  }
+
+  .broadcast{
+    margin:-9px -9px 8px;
+  }
+
+  .header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .clock{
+    text-align:left;
+  }
+
+  .clock strong{
+    font-size:17px;
+  }
+
+  .title{
+    letter-spacing:-2px;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="weather-wrap">
-    <a class="weatherwidget-io"
-       href="https://forecast7.com/ja/35d66138d64/406-0028/"
-       data-label_1="八十稲羽"
-       data-label_2="PERSONA 4"
-       data-font="Noto Sans Japanese"
-       data-icons="Climacons"
-       data-mode="Forecast"
-       data-days="3"
-       data-theme="orange"
-       data-basecolor="#ffe398"
-       data-cloudfill="#ffdb7b">
-       八十稲羽 PERSONA 4
-    </a>
+
+<div class="tv">
+
+  <div class="screen">
+
+    <div class="broadcast">
+      <div class="live">
+        <span class="live-dot"></span>
+        ON AIR
+      </div>
+      <div>CHANNEL 04 / INABA</div>
+    </div>
+
+    <header class="header">
+
+      <div>
+        <div class="station">LOCAL TELEVISION NETWORK</div>
+        <div class="title">八十稲羽</div>
+        <div class="subtitle">WEATHER REPORT</div>
+      </div>
+
+      <div class="clock">
+        LIVE FORECAST
+        <strong>WEATHER</strong>
+        5 DAYS
+      </div>
+
+    </header>
+
+    <div class="program">
+      INABA WEATHER PROGRAM
+    </div>
+
+    <div class="weather-frame">
+      <div class="weather-inner">
+
+        <a
+          class="weatherwidget-io"
+          href="https://forecast7.com/ja/35d66138d64/406-0028/"
+          data-label_1="八十稲羽"
+          data-label_2="WEATHER"
+          data-font="Noto Sans Japanese"
+          data-icons="Climacons Animated"
+          data-days="5"
+        >
+          八十稲羽 WEATHER
+        </a>
+
+      </div>
+    </div>
+
+    <div class="caption">
+      <div class="caption-left">
+        LOCAL WEATHER / 八十稲羽
+      </div>
+      <div class="caption-right">
+        40.6°N / 138.6°E
+      </div>
+    </div>
+
+    <div class="tv-footer">
+      <span>PERSONA 4 • WEATHER INFORMATION</span>
+      <span class="signal">
+        <i></i><i></i><i></i><i></i>
+      </span>
+    </div>
+
   </div>
 
-  <script>
-    !function(d,s,id){
-      var js,fjs=d.getElementsByTagName(s)[0];
-      if(!d.getElementById(id)){
-        js=d.createElement(s);
-        js.id=id;
-        js.src='https://weatherwidget.io/js/widget.min.js';
-        fjs.parentNode.insertBefore(js,fjs);
-      }
-    }(document,'script','weatherwidget-io-js');
-  </script>
+</div>
+
+<script>
+!function(d,s,id){
+  var js,fjs=d.getElementsByTagName(s)[0];
+  if(!d.getElementById(id)){
+    js=d.createElement(s);
+    js.id=id;
+    js.src='https://weatherwidget.io/js/widget.min.js';
+    fjs.parentNode.insertBefore(js,fjs);
+  }
+}(document,'script','weatherwidget-io-js');
+</script>
+
 </body>
 </html>
