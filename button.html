@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>八十稲羽 TV - BUTTONS</title>
+<title>八十稲羽 TV - SLIM BUTTONS</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
@@ -18,25 +18,26 @@
   box-sizing: border-box;
 }
 
+/* 전체 배경은 원래대로(색 없음/흰색), 글자는 검정 기본 */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  background: var(--black); /* 전체 배경을 검정색으로 변경 */
+  background: var(--white);
   font-family: "Noto Sans JP", "Noto Sans KR", sans-serif;
-  color: var(--white);
+  color: var(--black);
 }
 
 .container {
   width: min(900px, 92%);
-  margin: 30px auto;
+  margin: 40px auto;
 }
 
 /* 3개 버튼 그리드 배치 */
 .button-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
 }
 
 @media (max-width: 650px) {
@@ -45,22 +46,22 @@ html, body {
   }
 }
 
-/* 개별 버튼 카드 (애니메이션 유지) */
+/* 개별 버튼 카드 컨테이너 */
 .btn-card {
   position: relative;
-  background: var(--white); /* 외곽 테두리선을 대비되게 흰색으로 */
-  padding: 4px;
+  background: var(--black); /* 외곽 테두리 검정 */
+  padding: 3px; /* 테두리 두께 얇게 */
   text-decoration: none;
-  color: var(--white);
   display: flex;
   flex-direction: column;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   cursor: pointer;
 }
 
+/* 호버 애니메이션 */
 .btn-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 0 var(--white);
+  box-shadow: 0 5px 0 var(--black);
 }
 
 .btn-card:active {
@@ -68,20 +69,20 @@ html, body {
   box-shadow: none;
 }
 
-/* 카드 내부 스크린 */
+/* 카드 내부 스크린 - 얇고 슬림하게 높이 축소 */
 .btn-screen {
   position: relative;
   overflow: hidden;
-  background: var(--black); /* 카드 내부 배경 검정색 */
-  border: 2px solid var(--white); /* 내부 테두리 흰색 */
-  padding: 20px 16px;
+  background: var(--black); /* 내부 카드색 검정 */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* 안쪽 미세한 경계선 */
+  padding: 12px 14px; /* 위아래 여백을 대폭 줄임 */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 140px;
+  min-height: 95px; /* 전체 카드 높이를 슬림하게 제한 */
 }
 
-/* 스캔라인 효과 (밝은 톤으로 조정) */
+/* 스캔라인 효과 */
 .btn-screen::before {
   content: "";
   position: absolute;
@@ -90,40 +91,43 @@ html, body {
   z-index: 5;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(255,255,255,.05) 0px,
-    rgba(255,255,255,.05) 1px,
+    rgba(255,255,255,.04) 0px,
+    rgba(255,255,255,.04) 1px,
     transparent 1px,
-    transparent 5px
+    transparent 4px
   );
 }
 
-/* 상단 정보 바 (채널 표시 유지) */
+/* 상단 정보 바 (채널 표시) */
 .btn-top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 10px; /* 카테고리 글씨 확대 */
+  font-size: 9px;
   font-weight: 900;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
   color: var(--white);
-  border-bottom: 1px solid var(--white);
-  padding-bottom: 6px;
-  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 4px;
+  margin-bottom: 8px; /* 여백 줄임 */
 }
 
 .btn-ch {
-  background: var(--yellow); /* 채널 강조용 노란색 */
+  background: var(--yellow); /* 노란색 채널 뱃지 */
   color: var(--black);
-  padding: 2px 6px;
-  font-size: 9px;
+  padding: 1px 5px;
+  font-size: 8px;
   font-weight: 900;
+  border-radius: 2px;
 }
 
-/* 버튼 메인 콘텐츠 (이모티콘 제거 및 글씨 확대) */
+/* 버튼 메인 텍스트 그룹 */
 .btn-content {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between; /* 양쪽 정렬로 배치 변경 */
+  align-items: flex-end; /* 텍스트와 화살표 하단 정렬 */
   z-index: 2;
+  margin-top: auto; /* 남는 공간 위로 밀기 */
 }
 
 .btn-text-group {
@@ -132,29 +136,26 @@ html, body {
 }
 
 .btn-title {
-  font-size: 22px; /* 메인 타이틀 크게 변경 */
+  font-size: 20px; /* 큰 글씨 유지 */
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1;
   letter-spacing: -0.5px;
   color: var(--white);
 }
 
 .btn-sub {
-  font-size: 11px; /* 서브 타이틀 크게 변경 */
+  font-size: 9px;
   font-weight: 700;
-  color: var(--yellow); /* 노란색 포인트 */
-  margin-top: 4px;
+  color: var(--yellow);
+  margin-top: 3px;
   letter-spacing: 0.5px;
 }
 
-/* 하단 화살표 (애니메이션 유지) */
+/* 하단 우측 텍스트/화살표 (구조 변경하여 옆으로 배치) */
 .btn-footer {
-  margin-top: 16px;
-  text-align: right;
-  font-size: 12px; /* 푸터 버튼 글씨 확대 */
+  font-size: 11px;
   font-weight: 900;
   color: var(--white);
-  z-index: 2;
 }
 
 .btn-card:hover .btn-footer::after {
@@ -166,15 +167,17 @@ html, body {
   content: " ▷";
 }
 
-/* 전체 푸터 */
+/* 전체 페이지 푸터 */
 .global-footer {
-  margin-top: 25px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 900;
   letter-spacing: 0.5px;
-  color: var(--white);
+  color: var(--black); /* 푸터 텍스트는 흰 배경이므로 검정색 */
+  border-top: 2px solid var(--black);
+  padding-top: 8px;
 }
 </style>
 </head>
@@ -183,7 +186,7 @@ html, body {
 
 <div class="container">
 
-  <!-- 3개 버튼 그리드 -->
+  <!-- 3개 슬림 버튼 그리드 -->
   <div class="button-grid">
 
     <!-- 1. Discord -->
@@ -193,13 +196,15 @@ html, body {
           <span>COMMUNITY</span>
           <span class="btn-ch">CH.01</span>
         </div>
+        
+        <!-- 콘텐츠와 우측 하단 화살표를 한 줄(가로)에 배치하여 높이 절약 -->
         <div class="btn-content">
           <div class="btn-text-group">
             <span class="btn-title">DISCORD</span>
             <span class="btn-sub">JOIN SERVER</span>
           </div>
+          <div class="btn-footer"></div>
         </div>
-        <div class="btn-footer">CONNECT</div>
       </div>
     </a>
 
@@ -210,13 +215,14 @@ html, body {
           <span>DATABASE</span>
           <span class="btn-ch">CH.02</span>
         </div>
+        
         <div class="btn-content">
           <div class="btn-text-group">
             <span class="btn-title">EXCEL SHEET</span>
             <span class="btn-sub">VIEW DATA</span>
           </div>
+          <div class="btn-footer"></div>
         </div>
-        <div class="btn-footer">OPEN</div>
       </div>
     </a>
 
@@ -227,13 +233,14 @@ html, body {
           <span>SOCIAL MEDIA</span>
           <span class="btn-ch">CH.03</span>
         </div>
+        
         <div class="btn-content">
           <div class="btn-text-group">
             <span class="btn-title">X (TWITTER)</span>
             <span class="btn-sub">OFFICIAL PAGE</span>
           </div>
+          <div class="btn-footer"></div>
         </div>
-        <div class="btn-footer">FOLLOW</div>
       </div>
     </a>
 
