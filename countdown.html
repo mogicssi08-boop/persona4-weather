@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INABA COUNTDOWN</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+:root{
+  --yellow:#FFD83D;
+  --cream:#FFF0A3;
+  --black:#161616;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  background:transparent;
+}
+
+body{
+  font-family:"Noto Sans JP","Noto Sans KR",sans-serif;
+  color:var(--black);
+}
+
+.tv{
+  width:min(1100px,100%);
+  margin:0 auto;
+  padding:6px;
+  background:var(--black);
+}
+
+.screen{
+  position:relative;
+  overflow:hidden;
+  padding:9px 11px;
+  background:var(--yellow);
+  border:2px solid var(--black);
+}
+
+.screen::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:10;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,.035) 0px,
+    rgba(0,0,0,.035) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+}
+
+.broadcast{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  padding:3px 7px;
+  margin:-9px -11px 7px;
+  background:var(--black);
+  color:var(--yellow);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.live-dot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--yellow);
+}
+
+.header{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  padding:1px 2px 6px;
+  border-bottom:2px solid var(--black);
+}
+
+.title{
+  font-size:clamp(22px,4vw,34px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-1px;
+}
+
+.subtitle{
+  margin-top:3px;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
+
+.header-right{
+  text-align:right;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.7px;
+}
+
+.section{
+  position:relative;
+  z-index:2;
+  margin:6px 0 5px;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.countdowns{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+}
+
+.card{
+  min-width:0;
+  padding:6px 7px;
+  background:var(--cream);
+  border:1.5px solid var(--black);
+}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:3px;
+  margin-bottom:3px;
+}
+
+.type{
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.badge{
+  padding:1px 3px;
+  background:var(--black);
+  color:var(--yellow);
+  font-size:6px;
+  font-weight:900;
+}
+
+.dday{
+  margin:1px 0;
+  font-size:clamp(24px,3.5vw,34px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-1px;
+}
+
+.date{
+  font-size:8px;
+  font-weight:700;
+}
+
+.label{
+  margin-top:4px;
+  padding-top:4px;
+  border-top:1px solid var(--black);
+  font-size:9px;
+  font-weight:900;
+  line-height:1.2;
+}
+
+.footer{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  margin-top:6px;
+  font-size:6px;
+  font-weight:900;
+  letter-spacing:.7px;
+}
+
+.signal{
+  display:flex;
+  gap:2px;
+}
+
+.signal i{
+  width:4px;
+  height:4px;
+  background:var(--black);
+}
+
+@media(max-width:650px){
+  .countdowns{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:390px){
+  .screen{
+    padding:8px;
+  }
+
+  .broadcast{
+    margin-left:-8px;
+    margin-right:-8px;
+  }
+
+  .countdowns{
+    gap:5px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="tv">
+  <div class="screen">
+
+    <div class="broadcast">
+      <div class="live">
+        <span class="live-dot"></span>
+        ON AIR
+      </div>
+      <div>CHANNEL 04 / INABA</div>
+    </div>
+
+    <header class="header">
+      <div>
+        <div class="title">COUNTDOWN</div>
+        <div class="subtitle">INABA PROJECT SCHEDULE</div>
+      </div>
+      <div class="header-right">
+        LOCAL INFORMATION<br>
+        4 EVENTS
+      </div>
+    </header>
+
+    <div class="section">UPCOMING PROGRAM / D-DAY</div>
+
+    <div class="countdowns">
+
+      <div class="card">
+        <div class="card-top">
+          <span class="type">CHECKPOINT</span>
+          <span class="badge">점검</span>
+        </div>
+        <div class="dday" data-date="2026-12-21">D-</div>
+        <div class="date">2026.12.21</div>
+        <div class="label">1차 중간 점검</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="type">CHECKPOINT</span>
+          <span class="badge">점검</span>
+        </div>
+        <div class="dday" data-date="2027-01-15">D-</div>
+        <div class="date">2027.01.15</div>
+        <div class="label">2차 중간점검</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="type">DEADLINE</span>
+          <span class="badge">마감</span>
+        </div>
+        <div class="dday" data-date="2027-02-21">D-</div>
+        <div class="date">2027.02.21</div>
+        <div class="label">원고 마감일</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="type">RELEASE</span>
+          <span class="badge">발매</span>
+        </div>
+        <div class="dday" data-date="2027-02-18">D-</div>
+        <div class="date">2027.02.18</div>
+        <div class="label">🎮 페르소나 4 리버이벌 발매일</div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <span>PERSONA 4 • INABA INFORMATION NETWORK</span>
+      <span class="signal"><i></i><i></i><i></i><i></i></span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function updateDDays() {
+  const now = new Date();
+  now.setHours(0,0,0,0);
+
+  document.querySelectorAll(".dday").forEach(el => {
+    const target = new Date(el.dataset.date + "T00:00:00");
+    const diff = Math.round((target - now) / 86400000);
+
+    if (diff > 0) {
+      el.textContent = "D-" + diff;
+    } else if (diff === 0) {
+      el.textContent = "D-DAY";
+    } else {
+      el.textContent = "D+" + Math.abs(diff);
+    }
+  });
+}
+
+updateDDays();
+setInterval(updateDDays, 60 * 60 * 1000);
+</script>
+
+</body>
+</html>
