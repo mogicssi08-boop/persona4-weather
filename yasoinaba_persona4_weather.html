@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>八十稲羽 PERSONA 4</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: transparent;
+      overflow: hidden;
+    }
+    .weather-wrap {
+      width: 100%;
+      min-height: 180px;
+    }
+  </style>
+</head>
+<body>
+  <div class="weather-wrap">
+    <a class="weatherwidget-io"
+       href="https://forecast7.com/ja/35d66138d64/406-0028/"
+       data-label_1="八十稲羽"
+       data-label_2="PERSONA 4"
+       data-font="Noto Sans Japanese"
+       data-icons="Climacons"
+       data-mode="Forecast"
+       data-days="3"
+       data-theme="orange"
+       data-basecolor="#ffe398"
+       data-cloudfill="#ffdb7b">
+       八十稲羽 PERSONA 4
+    </a>
+  </div>
+
+  <script>
+    !function(d,s,id){
+      var js,fjs=d.getElementsByTagName(s)[0];
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src='https://weatherwidget.io/js/widget.min.js';
+        fjs.parentNode.insertBefore(js,fjs);
+      }
+    }(document,'script','weatherwidget-io-js');
+  </script>
+</body>
+</html>
