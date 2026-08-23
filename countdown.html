@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
 <title>INABA COUNTDOWN</title>
 
+
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+
+/* ========================================
+   COLOR
+   ======================================== */
 
 :root{
   --yellow:#FFD83D;
@@ -14,9 +27,11 @@
   --black:#161616;
 }
 
+
 *{
   box-sizing:border-box;
 }
+
 
 html,
 body{
@@ -26,48 +41,99 @@ body{
   background:var(--white);
 }
 
+
 body{
   font-family:"Noto Sans JP","Noto Sans KR",sans-serif;
   color:var(--black);
 }
 
+
 /* ========================================
-   위젯 전체 클릭 영역
+   TV WIDGET
    ======================================== */
 
 .tv{
+
   width:min(1100px,100%);
+
   margin:0 auto;
+
   padding:6px;
+
   background:var(--black);
 
-  /* 클릭 가능한 영역이라는 표시 */
   cursor:pointer;
+
+  transition:
+    transform .12s ease,
+    background-color .12s ease,
+    box-shadow .12s ease;
+
 }
 
 
 /* ========================================
-   TV SCREEN
+   HOVER EFFECT
    ======================================== */
 
-.screen{
-  position:relative;
-  overflow:hidden;
-  padding:9px 11px;
+.tv:hover{
 
-  background:var(--white);
-  border:2px solid var(--black);
+  background:var(--yellow);
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 4px 0 var(--black);
+
 }
 
 
-/* CRT 스캔라인 효과 */
+/* ========================================
+   CLICK / PRESS EFFECT
+   ======================================== */
+
+.tv:active{
+
+  transform:translateY(2px);
+
+  box-shadow:none;
+
+  background:var(--black);
+
+}
+
+
+/* ========================================
+   SCREEN
+   ======================================== */
+
+.screen{
+
+  position:relative;
+
+  overflow:hidden;
+
+  padding:9px 11px;
+
+  background:var(--white);
+
+  border:2px solid var(--black);
+
+}
+
+
+/* CRT SCANLINE */
 
 .screen::before{
+
   content:"";
+
   position:absolute;
+
   inset:0;
 
   pointer-events:none;
+
   z-index:10;
 
   background:repeating-linear-gradient(
@@ -77,49 +143,82 @@ body{
     transparent 1px,
     transparent 5px
   );
+
 }
 
 
 /* ========================================
-   ON AIR BAR
+   SCREEN HOVER
+   ======================================== */
+
+.tv:hover .screen{
+
+  border-color:var(--yellow);
+
+}
+
+
+/* ========================================
+   BROADCAST / ON AIR
    ======================================== */
 
 .broadcast{
+
   position:relative;
+
   z-index:2;
 
   display:flex;
+
   justify-content:space-between;
 
   padding:3px 7px;
+
   margin:-9px -11px 7px;
 
   background:var(--black);
+
   color:var(--yellow);
 
   font-size:9px;
+
   font-weight:900;
+
   letter-spacing:.8px;
+
 }
+
 
 .live{
+
   display:flex;
+
   align-items:center;
+
   gap:5px;
+
 }
 
 
-/* ON AIR 점멸 */
+/* ========================================
+   ON AIR BLINK
+   ======================================== */
 
 .live-dot{
+
   width:6px;
+
   height:6px;
 
   border-radius:50%;
+
   background:var(--yellow);
 
-  animation:liveBlink 1s steps(1,end) infinite;
+  animation:
+    liveBlink 1s steps(1,end) infinite;
+
 }
+
 
 @keyframes liveBlink{
 
@@ -137,33 +236,67 @@ body{
 
 
 /* ========================================
+   BROADCAST HOVER
+   ======================================== */
+
+.tv:hover .broadcast{
+
+  background:var(--yellow);
+
+  color:var(--black);
+
+}
+
+
+.tv:hover .live-dot{
+
+  background:var(--black);
+
+}
+
+
+/* ========================================
    HEADER
    ======================================== */
 
 .header{
+
   position:relative;
+
   z-index:2;
 
   display:flex;
+
   justify-content:space-between;
+
   align-items:flex-end;
 
   padding:1px 2px 6px;
 
   border-bottom:2px solid var(--black);
+
 }
 
+
 .title{
-  font-size:clamp(19px,3.2vw,28px);
+
+  font-size:clamp(
+    19px,
+    3.2vw,
+    28px
+  );
 
   font-weight:900;
 
   line-height:1;
 
   letter-spacing:-1px;
+
 }
 
+
 .subtitle{
+
   margin-top:3px;
 
   font-size:7px;
@@ -171,9 +304,12 @@ body{
   font-weight:900;
 
   letter-spacing:1px;
+
 }
 
+
 .header-right{
+
   text-align:right;
 
   font-size:7px;
@@ -181,15 +317,18 @@ body{
   font-weight:900;
 
   letter-spacing:.4px;
+
 }
 
 
 /* ========================================
-   SECTION TITLE
+   SECTION
    ======================================== */
 
 .section{
+
   position:relative;
+
   z-index:2;
 
   margin:6px 0 5px;
@@ -199,25 +338,36 @@ body{
   font-weight:900;
 
   letter-spacing:1px;
+
 }
 
 
 /* ========================================
-   COUNTDOWN CARDS
+   COUNTDOWN GRID
    ======================================== */
 
 .countdowns{
+
   position:relative;
+
   z-index:2;
 
   display:grid;
 
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:
+    repeat(2,1fr);
 
   gap:6px;
+
 }
 
+
+/* ========================================
+   CARD
+   ======================================== */
+
 .card{
+
   min-width:0;
 
   padding:6px 7px;
@@ -225,9 +375,12 @@ body{
   background:var(--white);
 
   border:1.5px solid var(--black);
+
 }
 
+
 .card-top{
+
   display:flex;
 
   justify-content:space-between;
@@ -237,17 +390,23 @@ body{
   gap:3px;
 
   margin-bottom:3px;
+
 }
 
+
 .type{
+
   font-size:7px;
 
   font-weight:900;
 
   letter-spacing:.4px;
+
 }
 
+
 .badge{
+
   padding:1px 3px;
 
   background:var(--black);
@@ -257,36 +416,52 @@ body{
   font-size:7px;
 
   font-weight:900;
+
 }
 
 
-/* D-DAY 숫자 */
+/* ========================================
+   D-DAY
+   ======================================== */
 
 .dday{
+
   margin:1px 0;
 
-  font-size:clamp(21px,3vw,29px);
+  font-size:clamp(
+    21px,
+    3vw,
+    29px
+  );
 
   font-weight:900;
 
   line-height:1;
 
   letter-spacing:-1px;
+
 }
 
 
-/* 날짜 */
+/* ========================================
+   DATE
+   ======================================== */
 
 .date{
+
   font-size:9px;
 
   font-weight:700;
+
 }
 
 
-/* 설명 */
+/* ========================================
+   LABEL
+   ======================================== */
 
 .label{
+
   margin-top:4px;
 
   padding-top:4px;
@@ -298,6 +473,7 @@ body{
   font-weight:900;
 
   line-height:1.2;
+
 }
 
 
@@ -306,7 +482,9 @@ body{
    ======================================== */
 
 .footer{
+
   position:relative;
+
   z-index:2;
 
   display:flex;
@@ -320,19 +498,27 @@ body{
   font-weight:900;
 
   letter-spacing:.5px;
+
 }
 
+
 .signal{
+
   display:flex;
 
   gap:2px;
+
 }
 
+
 .signal i{
+
   width:4px;
+
   height:4px;
 
   background:var(--black);
+
 }
 
 
@@ -343,28 +529,88 @@ body{
 @media(max-width:420px){
 
   .countdowns{
+
     grid-template-columns:1fr;
+
   }
 
 }
+
+
+/* ========================================
+   SMALL MOBILE
+   ======================================== */
 
 @media(max-width:390px){
 
   .screen{
+
     padding:8px;
+
   }
+
 
   .broadcast{
+
     margin-left:-8px;
+
     margin-right:-8px;
+
   }
 
+
   .countdowns{
+
     gap:5px;
+
   }
 
 }
+
+
+/* ========================================
+   DISABLE HOVER ON TOUCH DEVICES
+   ======================================== */
+
+@media(hover:none){
+
+  .tv:hover{
+
+    transform:none;
+
+    box-shadow:none;
+
+    background:var(--black);
+
+  }
+
+
+  .tv:hover .screen{
+
+    border-color:var(--black);
+
+  }
+
+
+  .tv:hover .broadcast{
+
+    background:var(--black);
+
+    color:var(--yellow);
+
+  }
+
+
+  .tv:hover .live-dot{
+
+    background:var(--yellow);
+
+  }
+
+}
+
 </style>
+
 </head>
 
 
@@ -372,9 +618,9 @@ body{
 
 
 <!-- ========================================
-     전체 위젯 클릭
+     CLICKABLE TV WIDGET
      
-     클릭하면 현재 노션 페이지에서
+     클릭하면 현재 노션 탭에서
      지정한 블록으로 이동
      ======================================== -->
 
@@ -422,6 +668,7 @@ body{
           COUNTDOWN
         </div>
 
+
         <div class="subtitle">
           INABA PROJECT SCHEDULE
         </div>
@@ -460,7 +707,9 @@ body{
     <div class="countdowns">
 
 
-      <!-- 1차 중간 점검 -->
+      <!-- ================================
+           1차 중간 점검
+           ================================ -->
 
       <div class="card">
 
@@ -469,6 +718,7 @@ body{
           <span class="type">
             CHECKPOINT
           </span>
+
 
           <span class="badge">
             점검
@@ -486,19 +736,25 @@ body{
 
 
         <div class="date">
+
           2026.12.21
+
         </div>
 
 
         <div class="label">
+
           1차 중간 점검
+
         </div>
 
       </div>
 
 
 
-      <!-- 페르소나 4 리버이벌 -->
+      <!-- ================================
+           페르소나 4 리버이벌
+           ================================ -->
 
       <div class="card">
 
@@ -507,6 +763,7 @@ body{
           <span class="type">
             RELEASE
           </span>
+
 
           <span class="badge">
             발매
@@ -524,12 +781,16 @@ body{
 
 
         <div class="date">
+
           2027.02.18
+
         </div>
 
 
         <div class="label">
+
           🎮 페르소나 4 리버이벌 발매일
+
         </div>
 
       </div>
@@ -569,16 +830,22 @@ body{
 
 
 <!-- ========================================
-     D-DAY 계산
+     D-DAY SCRIPT
      ======================================== -->
 
 <script>
+
 
 function updateDDays(){
 
   const now = new Date();
 
-  now.setHours(0,0,0,0);
+  now.setHours(
+    0,
+    0,
+    0,
+    0
+  );
 
 
   document
@@ -588,13 +855,15 @@ function updateDDays(){
 
       const target =
         new Date(
-          el.dataset.date + "T00:00:00"
+          el.dataset.date +
+          "T00:00:00"
         );
 
 
       const diff =
         Math.round(
-          (target - now) / 86400000
+          (target - now) /
+          86400000
         );
 
 
@@ -605,6 +874,7 @@ function updateDDays(){
 
       }
 
+
       else if(diff === 0){
 
         el.textContent =
@@ -612,10 +882,12 @@ function updateDDays(){
 
       }
 
+
       else{
 
         el.textContent =
-          "D+" + Math.abs(diff);
+          "D+" +
+          Math.abs(diff);
 
       }
 
@@ -624,7 +896,7 @@ function updateDDays(){
 }
 
 
-/* 처음 실행 */
+/* 최초 실행 */
 
 updateDDays();
 
@@ -635,6 +907,7 @@ setInterval(
   updateDDays,
   60 * 60 * 1000
 );
+
 
 </script>
 
